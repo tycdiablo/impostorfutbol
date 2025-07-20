@@ -1,17 +1,14 @@
 // public/script.js
-const socket = io('https://impostor-futbol.onrender.com/'); // ¡REEMPLAZA ESTA URL CON LA TUYA!
-const io = new Server(server, {
-    cors: {
-        origin: ["https://impostorfutbol.netlify.app/", "http://localhost:3000"],
-        methods: ["GET", "POST"] // Los métodos HTTP permitidos
-    }
-});
+
+// Esta es la ÚNICA línea que necesitas para conectar el cliente al servidor.
+// La librería Socket.IO (cargada en index.html) ya te da el objeto 'io'.
+const socket = io('https://impostor-futbol.onrender.com/'); // ¡Asegúrate que esta URL sea la correcta de tu Render backend!
 
 // --- Elementos del DOM ---
+// El resto de tu código de cliente va aquí.
 const usernameScreen = document.getElementById('username-screen');
 const usernameInput = document.getElementById('username-input');
 const setUsernameBtn = document.getElementById('set-username-btn');
-
 const youAreAdminMessage = document.getElementById('you-are-admin-message');
 const gameInfoDisplay = document.getElementById('game-info-display');
 const voteTieSection = document.getElementById('vote-tie-section');
