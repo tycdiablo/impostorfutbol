@@ -1,4 +1,5 @@
 // server.js
+const cors = require('cors');
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -9,7 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // --- Configuración de la Base de Datos (ejemplo con MongoDB) ---
-const uri = "mongodb+srv://elbananas2010:kimoncha@impostorfutbol.jxdonl3.mongodb.net/?retryWrites=true&w=majority&appName=impostorfutbol"; // Reemplaza con tu URI de MongoDB Atlas
+const uri = "mongodb+srv://elbananas2010:kimoncha@impostorfutbol.w4ayo7w.mongodb.net/?retryWrites=true&w=majority&appName=impostorfutbol"; // Reemplaza con tu URI de MongoDB Atlas
 const client = new MongoClient(uri);
 
 let playersDB; // Aquí almacenaremos la colección de jugadores
@@ -354,7 +355,7 @@ function startDiscussionPhase(roomId) {
     io.to(roomId).emit('start discussion', room.currentRound.clues); // Avisa a todos y les envía todas las pistas
     console.log(`Iniciando discusión en sala ${roomId}`);
 
-    startPhaseTimer(roomId, 'discussion', 90, () => { // 1.5 minutos (90 segundos) para discutir
+    startPhaseTimer(roomId, 'discussion', 45, () => { // 1.5 minutos (90 segundos) para discutir
         startVotingPhase(roomId); // Cuando termina, pasa a votar
     });
 }

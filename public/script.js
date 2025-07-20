@@ -1,5 +1,11 @@
 // public/script.js
 const socket = io('https://impostor-futbol.onrender.com/'); // ¡REEMPLAZA ESTA URL CON LA TUYA!
+const io = new Server(server, {
+    cors: {
+        origin: ["https://impostorfutbol.netlify.app/", "http://localhost:3000"],
+        methods: ["GET", "POST"] // Los métodos HTTP permitidos
+    }
+});
 
 // --- Elementos del DOM ---
 const usernameScreen = document.getElementById('username-screen');
