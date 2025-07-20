@@ -1,0 +1,17 @@
+{
+  "name": "impostor-futbol",
+  "version": "1.0.0",
+  "description": "Un juego multijugador de Impostor Fútbol",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^6.17.0",
+    "socket.io": "^4.7.5"
+  }
+}

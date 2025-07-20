@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#app {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #00ff99;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #00cc88;
+}
+
+button {
+    background-color: #008855;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: #00aa66;
+}
+
+button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #444;
+    color: #eee;
+    width: calc(100% - 22px); /* Ancho menos padding y borde */
+}
+
+.hidden {
+    display: none;
+}
+
+#player-role-display {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.impostor-bg {
+    background-color: #880000; /* Fondo rojo oscuro para el impostor */
+    color: white;
+}
+
+.player-bg {
+    background-color: #0055aa; /* Fondo azul para el jugador normal */
+    color: white;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #444;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+#chat-messages {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #555;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    background-color: #444;
+    border-radius: 5px;
+}

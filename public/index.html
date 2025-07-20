@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impostor Fútbol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Impostor Fútbol</h1>
+
+        <div id="username-screen">
+            <input type="text" id="username-input" placeholder="Elige tu nombre de usuario" maxlength="15">
+            <button id="set-username-btn">Jugar</button>
+        </div>
+
+        <div id="main-menu" class="hidden">
+            <button id="public-rooms-btn">Salas Públicas</button>
+            <button id="private-rooms-menu-btn">Sala Privada</button>
+        </div>
+
+        <div id="public-rooms-section" class="hidden">
+            <h2>Salas Públicas</h2>
+            <div id="public-rooms-list">
+                <p>Cargando salas...</p>
+            </div>
+            <button id="create-public-room-btn">Crear Sala Pública</button>
+            <button id="back-to-main-menu-from-public">Volver al Menú</button>
+        </div>
+
+        <div id="private-rooms-menu" class="hidden">
+            <h2>Sala Privada</h2>
+            <button id="create-private-room-btn">Crear Sala Privada</button>
+            <input type="text" id="join-private-room-input" placeholder="Código de Sala">
+            <button id="join-private-room-btn">Unirse a Sala Privada</button>
+            <button id="back-to-main-menu-from-private">Volver al Menú</button>
+        </div>
+
+        <div id="room-lobby" class="hidden">
+            <h2 id="room-code-display">Código de Sala: <span id="room-code"></span></h2>
+            <p>Comparte este código para que tus amigos se unan.</p>
+            <button id="copy-invite-link-btn">Copiar Enlace de Invitación</button>
+            <p id="you-are-admin-message" class="hidden" style="color: yellow; font-weight: bold;">¡Eres el administrador de la sala!</p>
+            <h3>Jugadores en la Sala:</h3>
+            <ul id="players-in-room">
+                </ul>
+            <button id="start-game-btn" disabled>EMPEZAR JUEGO</button>
+            <button id="leave-room-btn">Salir de la Sala</button>
+        </div>
+
+        <div id="game-screen" class="hidden">
+            <h2 id="game-status">Esperando que el juego comience...</h2>
+            <div id="player-role-display">
+                </div>
+            <p id="timer-display"></p>
+            <p id="game-info-display" style="font-style: italic; margin-top: 10px;"></p>
+
+            <div id="clue-input-section" class="hidden">
+                <input type="text" id="clue-input" placeholder="Tu pista (1 o 2 palabras)" maxlength="20">
+                <button id="send-clue-btn">Enviar Pista</button>
+            </div>
+            <div id="clues-display">
+                <h3>Pistas:</h3>
+                <ul id="current-clues">
+                    </ul>
+            </div>
+
+            <div id="discussion-section" class="hidden">
+                <h3>Chat de Discusión:</h3>
+                <div id="chat-messages">
+                    </div>
+                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." maxlength="100">
+                <button id="send-chat-btn">Enviar Chat</button>
+            </div>
+
+            <div id="voting-section" class="hidden">
+                <h3>Vota por el Impostor:</h3>
+                <div id="voting-options">
+                    </div>
+            </div>
+
+            <div id="vote-tie-section" class="hidden">
+    <h3>¡Empate en la votación! Cambia tu voto:</h3>
+    <p id="tie-candidates-info"></p>
+    <div id="tie-vote-options">
+        </div>
+</div>
+
+            <div id="results-screen" class="hidden">
+                <h3>Resultados:</h3>
+                <p id="expelled-player-info"></p>
+                <p id="game-end-message"></p>
+                <button id="back-to-lobby-btn" class="hidden">Volver al Lobby</button>
+                <button id="exit-game-btn" class="hidden">Salir del Lobby</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
