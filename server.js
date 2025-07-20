@@ -7,6 +7,21 @@ const { MongoClient } = require('mongodb');
 
 const app = express();
 const server = http.createServer(app);
+
+app.use(cors({
+    origin: ["https://impostorfutbol.netlify.app", "http://localhost:3000"], // Tu URL de Netlify y localhost
+    methods: ["GET", "POST"]
+}));
+
+// Configuración de Socket.IO (esta parte ya la tenías bien, pero la revisamos para contexto)
+const io = new Server(server, {
+    cors: {
+        origin: ["https://impostorfutbol.netlify.app", "http://localhost:3000"], // Tu URL de Netlify y localhost
+        methods: ["GET", "POST"]
+    }
+});
+
+
 const io = new Server(server);
 
 // --- Configuración de la Base de Datos (ejemplo con MongoDB) ---
