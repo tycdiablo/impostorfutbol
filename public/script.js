@@ -1,5 +1,5 @@
 // public/script.js
-const socket = io(); // Conexión al servidor Socket.IO
+const socket = io('https://impostor-futbol.onrender.com/'); // ¡REEMPLAZA ESTA URL CON LA TUYA!
 
 // --- Elementos del DOM ---
 const usernameScreen = document.getElementById('username-screen');
