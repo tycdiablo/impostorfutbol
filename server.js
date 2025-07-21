@@ -873,7 +873,7 @@ socket.on('start game', async () => { // ESTE ES EL INICIO DE 'start game'
         io.to(roomId).emit('start discussion', room.currentRound.clues); // Avisa a todos y les envía todas las pistas
         console.log(`Iniciando discusión en sala ${roomId}`);
 
-        startPhaseTimer(roomId, 'discussion', 45, () => { // 1.5 minutos (90 segundos) para discutir
+        startPhaseTimer(roomId, 'discussion', 90, () => { // 1.5 minutos (90 segundos) para discutir
             startVotingPhase(roomId); // Cuando termina, pasa a votar
         });
     }
