@@ -997,6 +997,62 @@ socket.on('start game', async () => { // ESTE ES EL INICIO DE 'start game'
         }
     }
 
+    // ... (TU CÓDIGO EXISTENTE PARA MANEJAR LA VOTACIÓN, CONTAR VOTOS Y ELIMINAR A UN JUGADOR) ...
+
+// ** -> INICIO DEL CÓDIGO A AGREGAR/MODIFICAR <- **
+
+// 1. Obtener la lista de jugadores activos (vivos)
+const jugadoresActivos = Object.values(players).filter(player => player.status === 'alive');
+
+// 2. Verificar si solo quedan 2 jugadores activos (o menos, para asegurar)
+if (jugadoresActivos.length <= 2) {
+    let impostoresRestantes = 0;
+    let inocentesRestantes = 0;
+
+    // 3. Contar cuántos impostores e inocentes quedan entre los jugadores activos
+    jugadoresActivos.forEach(player => {
+        if (player.role === 'impostor') {
+            impostoresRestantes++;
+        } else if (player.role === 'innocent') {
+            inocentesRestantes++;
+        }
+    });
+
+    let ganador = '';
+    let razonFin = '';
+
+    // 4. Determinar el ganador según los roles restantes
+    if (impostoresRestantes >= 1 && inocentesRestantes === 1) {
+        // Caso 1: Queda al menos 1 Impostor y 1 Inocente. ¡Los Impostores ganan!
+        // (En el escenario de 2 jugadores, esto significa 1 impostor y 1 inocente)
+        ganador = 'Los Impostores';
+        razonFin = 'El impostor ha logrado sobrevivir hasta el final.';
+    } else if (impostoresRestantes === 0 && inocentesRestantes === 2) {
+        // Caso 2: Quedan 2 Inocentes (significa que todos los impostores fueron eliminados antes)
+        ganador = 'Los Inocentes';
+        razonFin = 'Todos los impostores han sido descubiertos y eliminados.';
+    } else {
+        // Este es un caso de seguridad para escenarios inesperados.
+        ganador = 'Nadie';
+        razonFin = 'El juego ha terminado por una condición inesperada.';
+    }
+
+    // 5. Emitir el evento de fin de juego a todos los clientes
+    io.emit('gameOver', { reason: razonFin, winner: ganador });
+
+    // 6. Llamar a la función para resetear el estado del juego
+    // (Asegúrate de tener una función 'resetGame()' que limpie el estado para una nueva partida)
+    resetGame(); 
+
+} else {
+    // Si quedan más de 2 jugadores, el juego continúa con la siguiente fase/ronda
+    io.emit('continueGame'); // O el evento que uses para indicar que el juego sigue
+}
+
+// ** -> FIN DEL CÓDIGO A AGREGAR/MODIFICAR <- **
+
+// ... (TU CÓDIGO EXISTENTE QUE CONTINÚA DESPUÉS DE LA LÓGICA DE ELIMINACIÓN) ...
+
     // Función para FINALIZAR el juego
     function endGame(roomId, winner, message) {
         const room = rooms[roomId];
