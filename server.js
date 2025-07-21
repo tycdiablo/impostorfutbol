@@ -1,25 +1,28 @@
 // server.js
-const cors = require('cors');
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+const cors = require('cors'); // Asegúrate que esta línea esté aquí
 
 const app = express();
 const server = http.createServer(app);
 
+// *** MODIFICACIÓN CLAVE AQUÍ: APLICAR CORS A LA APLICACIÓN EXPRESS PRIMERO ***
+// Esto asegura que todas las solicitudes HTTP (incluida la de socket.io.js) reciban las cabeceras CORS.
 app.use(cors({
-    origin: ["https://impostorfutbol.netlify.app", "http://localhost:3000"], // Tu URL de Netlify y localhost
+    origin: ["https://impostorfutbol.netlify.app", "http://localhost:3000"], // TU URL DE NETLIFY EXACTA
     methods: ["GET", "POST"]
 }));
 
-// Configuración de Socket.IO (esta parte ya la tenías bien, pero la revisamos para contexto)
+// Configuración de Socket.IO con CORS para las conexiones WebSocket
 const io = new Server(server, {
     cors: {
-        origin: ["https://impostorfutbol.netlify.app", "http://localhost:3000"], // Tu URL de Netlify y localhost
+        origin: ["https://impostorfutbol.netlify.app", "http://localhost:3000"], // TU URL DE NETLIFY EXACTA
         methods: ["GET", "POST"]
     }
 });
+
 
 // --- Configuración de la Base de Datos (ejemplo con MongoDB) ---
 const uri = "mongodb+srv://elbananas2010:kimoncha@impostorfutbol.w4ayo7w.mongodb.net/?retryWrites=true&w=majority&appName=impostorfutbol"; // Reemplaza con tu URI de MongoDB Atlas
