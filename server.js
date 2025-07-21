@@ -4,6 +4,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Asegúrate que esta línea esté aquí
+const { MongoClient } = require('mongodb'); // <-- ¡Añade esta línea!
 
 const app = express();
 const server = http.createServer(app);
