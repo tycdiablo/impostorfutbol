@@ -21,9 +21,6 @@ const io = new Server(server, {
     }
 });
 
-
-const io = new Server(server);
-
 // --- Configuración de la Base de Datos (ejemplo con MongoDB) ---
 const uri = "mongodb+srv://elbananas2010:kimoncha@impostorfutbol.w4ayo7w.mongodb.net/?retryWrites=true&w=majority&appName=impostorfutbol"; // Reemplaza con tu URI de MongoDB Atlas
 const client = new MongoClient(uri);
