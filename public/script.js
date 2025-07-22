@@ -61,6 +61,43 @@ const gameEndMessage = document.getElementById('game-end-message');
 const backToLobbyBtn = document.getElementById('back-to-lobby-btn');
 const exitGameBtn = document.getElementById('exit-game-btn');
 
+// Función para obtener el valor de un parámetro de la URL
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Cuando el socket se conecta, verificamos si hay un roomCode en el URL
+socket.on('connect', () => {
+    const roomCodeFromUrl = getUrlParameter('room');
+    if (roomCodeFromUrl) {
+        // Si hay un roomCode, intentamos unirnos a esa sala
+        // Necesitarás una forma de obtener el nombre del jugador aquí.
+        // Para simplificar por ahora, si el nombre no está seteado, puedes pedirlo o usar uno temporal.
+        // Idealmente, el usuario ya debería haber ingresado su nombre.
+
+        // Si tienes un input de nombre:
+        const playerNameInput = document.getElementById('playerNameInput'); // Asume que tienes un input con ID 'playerNameInput'
+        let playerName = playerNameInput ? playerNameInput.value.trim() : `Jugador ${Math.floor(Math.random() * 1000)}`; // Fallback si no hay input o nombre
+
+        if (playerName === "") {
+            playerName = `Jugador ${Math.floor(Math.random() * 1000)}`; // Asegura un nombre si el input está vacío
+        }
+
+        // Emitir el evento para unirse a la sala con el código del URL
+        socket.emit('joinRoom', { roomCode: roomCodeFromUrl, playerName: playerName });
+
+        // Puedes ocultar la pantalla de "crear/unirse a sala" y mostrar la de la sala
+        document.getElementById('startScreen').style.display = 'none'; // Oculta la pantalla de inicio
+        document.getElementById('lobbyScreen').style.display = 'block'; // Muestra la pantalla de la sala de espera
+        document.getElementById('roomCodeDisplay').textContent = roomCodeFromUrl; // Muestra el código de la sala
+
+        // Asegúrate de que tu lógica de 'joinRoom' en el frontend maneje esto correctamente
+        // y muestre a los jugadores en la sala.
+    }
+});
 
 let currentRoomId = null;
 let username = '';
@@ -382,7 +419,7 @@ socket.on('start discussion', (clues) => {
     discussionSection.classList.remove('hidden'); // Muestra la sección de discusión y chat
     gameStatus.textContent = '¡Hora de discutir!'; // Mensaje de estado
     chatMessages.innerHTML = ''; // Limpia el chat anterior
-    gameInfoDisplay.textContent = '¡Discusión en curso! (1.5 minutos)'; // Mensaje informativo
+    gameInfoDisplay.textContent = '¡Discusión en curso! (45 segundos'; // Mensaje informativo
 
     // Muestra todas las pistas dadas al inicio de la discusión
     const pCluesIntro = document.createElement('p');
